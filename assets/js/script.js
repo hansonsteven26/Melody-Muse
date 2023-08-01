@@ -1,35 +1,46 @@
-const dogKey="live_FTU78RuBy8JufSDO0cYsxxEjUweRpQ8Vaa7oRI682TC2gEVMzBSGe1WxqUxkiDjj"
-const dogUrl="https://api.thedogapi.com/v1/breeds?breed_ids=1"
-let imageEl= document.getElementById("card-1")
-let breedImage=document.getElementById("breedImage")
+const dogKey = "live_FTU78RuBy8JufSDO0cYsxxEjUweRpQ8Vaa7oRI682TC2gEVMzBSGe1WxqUxkiDjj"
+const dogUrl = "https://api.thedogapi.com/v1/breeds?breed_ids=1"
+let imageEl = document.getElementById("card-1")
+let breedImage = document.getElementById("breedImage")
+let searchEl = document.getElementById("breedInput");
+let breedName = "";
+let searchButton = document.getElementById("searchButton");
 
-let searchButton= document.getElementById("searchButton");
-searchButton.addEventListener("click",function(){
+searchButton.addEventListener("click", function () {
+    // we want the value of the search box to display cards
+    // show cards that CONTAIN search input
+    breedName = searchEl.value;
+    console.log(searchEl.value);
+
+    $.ajax({
+
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/dogs?name=' + breedName,
+        headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw' },
+        contentType: 'application/json',
+        success: function (result) {
+            for (let i = 0; i < 3; i++) {
+                let imageLink = result[i].image_link;
+                document.getElementById('card-' + i).setAttribute("src", imageLink);
+
+                console.log(result[i].image_link)
+                console.error();
+            }
+            error: function ajaxError(jqXHR) {
+                console.error('Error: ', jqXHR.responseText);
+            }
+            
+        }
+
+    });
+
 })
 
-async function checkEvents(){
+async function checkEvents() {
     const response = await fetch(dogUrl + `&apikey=${dogKey}`);
-     let data = await response.json();
+    let data = await response.json();
 
-    console.log(data);
 }
 checkEvents();
 
-var breedName = 'poodle'
-$.ajax({
-    method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/dogs?name=' + breedName,
-    headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw'},
-    contentType: 'application/json',
-    success: function(result) {
-    for(let i = 0; i < 3; i++) {
-        let imageLink= result[i].image_link;
-        document.getElementById('card-' +i).setAttribute("src", imageLink);
-        console.log(imageEl.getAttribute("src"))
 
-        console.log(result[0].image_link)
-    }
-    error: function ajaxError(jqXHR) {
-        console.error('Error: ', jqXHR.responseText);
-    }}
-});
