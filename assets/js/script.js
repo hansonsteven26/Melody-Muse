@@ -1,22 +1,26 @@
 const dogKey="live_FTU78RuBy8JufSDO0cYsxxEjUweRpQ8Vaa7oRI682TC2gEVMzBSGe1WxqUxkiDjj"
-const dogUrl="https://api.thedogapi.com/v1/breeds?breed_ids=1"
+let breedId = "abys"
+const dogUrl=`https://api.thedogapi.com/v1/breeds?breed_ids=${breedId}`
+let imageEl = document.getElementById("card-1")
 
 async function checkEvents(){
     const response = await fetch(dogUrl + `&apikey=${dogKey}`);
      let data = await response.json();
 
-    console.log(data);
+    console.log(data[0].name);
 }
 checkEvents();
 
 var breedName = 'poodle'
 $.ajax({
     method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/animals?name=' + breedName,
+    url: 'https://api.api-ninjas.com/v1/dogs?name=' + breedName,
     headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw'},
     contentType: 'application/json',
     success: function(result) {
         console.log(result);
+        let imageLink = result[0].image_link;
+
     },
     error: function ajaxError(jqXHR) {
         console.error('Error: ', jqXHR.responseText);
