@@ -20,16 +20,19 @@ searchButton.addEventListener("click", function () {
         contentType: 'application/json',
         success: function (result) {
             for (let i = 0; i < 3; i++) {
-                let imageLink = result[i].image_link;
-                document.getElementById('card-' + i).setAttribute("src", imageLink);
+                try {
+                    let imageLink = result[i].image_link;
+                    document.getElementById('card-' + i).setAttribute("src", imageLink);
 
-                console.log(result[i].image_link)
-                console.error();
+                    console.log(result[i].image_link)
+                    console.error();
+                } catch (error) {
+                    document.getElementById('card-' + i).setAttribute("src", "https://api-ninjas.com/images/dogs/dog.jpg");// placeholder image goes here
+                }
             }
             error: function ajaxError(jqXHR) {
                 console.error('Error: ', jqXHR.responseText);
             }
-            
         }
 
     });
