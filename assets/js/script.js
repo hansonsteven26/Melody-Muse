@@ -19,10 +19,11 @@ searchButton.addEventListener("click", function () {
         headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw' },
         contentType: 'application/json',
         success: function (result) {
-            for (let i = 0; i < 3; i++) {
+            for (let i = 0; i < 3 && i < result.length; i++) {
                 try {
                     let imageLink = result[i].image_link;
                     document.getElementById('card-' + i).setAttribute("src", imageLink);
+                    document.getElementById(i).classList.remove("hidden");
 
                     console.log(result[i].image_link)
                     console.error();
@@ -46,4 +47,41 @@ async function checkEvents() {
 }
 checkEvents();
 
+// Add a click event listener to each image
+
+for (let i = 0; i < 3; i++) {
+    let imageEl = document.getElementById("card-" + i);
+    imageEl.addEventListener("click", function (event) {
+        let src= event.target.getAttribute("src");
+        let temp=src.split("/");
+        let breedName= temp[5].replace(".jpg","").replace("_","%20");
+      // Get the breed name from the input field
+
+      console.log(event.target)
+      // Fetch breed information from the API
+      fetchBreedInformation(breedName,event.target);
+      
+
+    });
+  }
+  function fetchBreedInformation(breedName) {
+  $.ajax({
+    method: 'GET',
+    url: 'https://api.api-ninjas.com/v1/dogs?name='+breedName+'&min_height&max_height&min_weight&max_weight&max_life_expectancy&shedding&barking&energy&protectiveness&trainability',
+    headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw'},
+    contentType: 'application/json',
+    success: function(result) {
+        console.log(result);
+        // document.getElementById("breedTitle").textContent = breedInfo.name;
+        // document.getElementById("breedDescription").textContent = breedInfo.description;
+  
+          // Show the modal
+          let modal = document.getElementById("modal");
+          modal.classList.remove("hidden");
+    },
+    error: function ajaxError(jqXHR) {
+        console.error('Error: ', jqXHR.responseText);
+    }
+});
+  }
 
