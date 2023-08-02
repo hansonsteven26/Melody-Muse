@@ -9,10 +9,15 @@ let favoriteBtnEL = "";
 let number = 0;
 
 searchButton.addEventListener("click", function () {
+    for (let i = 0; i < 3; i++){
+        document.getElementById("card-" + i).setAttribute("src", "");
+        document.getElementById(i).classList.add("hidden");
+    }
     // we want the value of the search box to display cards
     // show cards that CONTAIN search input
     breedName = searchEl.value;
     console.log(searchEl.value);
+    // $('img[type="src"]').val('');
 
     $.ajax({
 
@@ -73,10 +78,10 @@ function fetchBreedInformation(breedName) {
             // document.getElementById("breedDescription").textContent = breedInfo.description;
 
             // Show the modal
-            document.getElementById("breedTitle").textContent = result[0].name;
-            document.getElementById("breedDescription").textContent = result[0].trainability;
-            document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
-            document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
+          document.getElementById("breedTitle").textContent = result[0].name;
+          document.getElementById("breedDescription").textContent = "Trainability 1 to 5: " + result[0].trainability;
+          document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
+          document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
             favoriteBtnEL = document.getElementById("favorite-button");
