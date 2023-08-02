@@ -23,9 +23,14 @@
     <button id="searchButton" class="font-semibold pl-4">Search</button>
   </div>
   <div class="grid grid-rows-1 grid-flow-col gap-2 justify-center" id="breedImage">
-    <div id="0" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-0" src="" alt="Dog Image 1"></div>
-    <div id="1" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-1" src="" alt="Dog Image 2"></div>
-    <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" src="" alt="Dog Image 3"></div>
+    <div id="0" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-0" onclick="modal.showModal()" src="" alt="Dog Image 1"></div>
+    <div id="1" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-1" onclick="modal.showModal()" src="" alt="Dog Image 2"></div>
+    <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" onclick="modal.showModal()" src="" alt="Dog Image 3"></div>
+  </div>
+  <div>
+    <h2>Your Top 3 Breeds:</h2>
+      <ul id="fav-breed">
+      </ul>
   </div>
 <!-- Modal container -->
 <!-- <div id="modal" class="hidden inset-0 items-center justify-center bg-black bg-opacity-50">
@@ -34,9 +39,12 @@
 </div> -->
 <dialog id="modal" class="modal modal-bottom sm:modal-middle">
   <form method="dialog" class="modal-box">
-    <h3 class="modal-content font-bold text-lg">Hello!</h3>
-    <p class="py-4">Press ESC key or click the button below to close</p>
+    <h3 id="breedTitle" class="modal-content font-bold text-lg"></h3>
+    <p id="breedHeight" class="py-4"></p>
+    <p id="breedDescription" class="py-4"></p>
+    <p id="breedWeight" class="py-4"></p>
     <div class="modal-action">
+      <button id="favorite-button" class="btn">Favorite</button>
       <!-- if there is a button in form, it will close the modal -->
       <button class="btn">Close</button>
     </div>
