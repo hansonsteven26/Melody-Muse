@@ -6,6 +6,7 @@ let searchEl = document.getElementById("breedInput");
 let breedName = "";
 let searchButton = document.getElementById("searchButton");
 let favoriteBtnEL = "";
+let number = 0;
 
 searchButton.addEventListener("click", function () {
     // we want the value of the search box to display cards
@@ -26,7 +27,6 @@ searchButton.addEventListener("click", function () {
                 document.getElementById(i).classList.remove("hidden");
 
                 console.log(result[i].image_link)
-                console.error();
             }
             error: function ajaxError(jqXHR) {
                 console.error('Error: ', jqXHR.responseText);
@@ -73,16 +73,16 @@ function fetchBreedInformation(breedName) {
             // document.getElementById("breedDescription").textContent = breedInfo.description;
 
             // Show the modal
-          document.getElementById("breedTitle").textContent = result[0].name;
-          document.getElementById("breedDescription").textContent = result[0].trainability;
-          document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
-          document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
+            document.getElementById("breedTitle").textContent = result[0].name;
+            document.getElementById("breedDescription").textContent = result[0].trainability;
+            document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
+            document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
-           favoriteBtnEL = document.getElementById("favorite-button");
-            favoriteBtnEL.addEventListener("click", displayFavorites);
+            favoriteBtnEL = document.getElementById("favorite-button");
+            favoriteBtnEL.addEventListener("click", saveFavorites);
 
-          
+
 
         },
         error: function ajaxError(jqXHR) {
@@ -95,31 +95,40 @@ function fetchBreedInformation(breedName) {
 //     localStorage.setItem("fav-1", breedName);
 //     localStorage.setItem("fav-2", breedName);
 // };
-function displayFavorites() {
-    const favBreedsElement = document.getElementById('fav-breed');
-    favBreedsElement.innerHTML = '';
-    localStorage.setItem("fav-0", breedName);
 
-    for (let i = 0; i < localStorage.length; i++) {
-        const name = localStorage.getItem("fav-" + i);
-        const li = document.createElement('li');
-        li.textContent = `${name}`;
-        favBreedsElement.appendChild(li);
+function isLocalStorageAvailable(){
+    var test = 'test';
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
     }
 }
-displayFavorites();
-//store high scores
-function saveName(breedName) {
-    localStorage.setItem("fav-0", breedName);
-    console.log(`Initials: ${breedName}, Score: ${score}`);
+
+function saveFavorites() {
+    localStorage.setItem(`fav-${number}`, breedName);
+    let favListItem = document.getElementById(`fav-${number}`);
+    console.log(document.getElementById("fav-" + number).textContent);
+    favListItem.textContent = localStorage.getItem(`fav-${number}`);
+    number++;
+    if (number > 2) {
+        number = 0;
+    }
+    // localStorage.setItem("fav-0", breedName);
+
+    // for (let i = 0; i < 3; i++) {
+        // const favBreedName = document.getElementById("fav-" + i);
+
+        // if (!isLocalStorageAvailable) {
+        //     localStorage.setItem("fav-" + (i + 1), breedName);
+        // } else {
+        //     localStorage.setItem("fav-" + i, breedName);
+        // }
+        // const li = document.createElement('li');
+        // li.textContent = `${favBreedName}`;
+        // favBreedsElement.appendChild(localStorage.getItem("fav-" + (i + 1)));
+    // }
+
 }
-saveName();
-
-
-
-
-
-
-
- 
-
