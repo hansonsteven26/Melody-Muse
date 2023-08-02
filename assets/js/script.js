@@ -5,6 +5,7 @@ let breedImage = document.getElementById("breedImage")
 let searchEl = document.getElementById("breedInput");
 let breedName = "";
 let searchButton = document.getElementById("searchButton");
+let favoriteBtnEL = "";
 
 searchButton.addEventListener("click", function () {
     // we want the value of the search box to display cards
@@ -72,12 +73,53 @@ function fetchBreedInformation(breedName) {
             // document.getElementById("breedDescription").textContent = breedInfo.description;
 
             // Show the modal
+          document.getElementById("breedTitle").textContent = result[0].name;
+          document.getElementById("breedDescription").textContent = result[0].trainability;
+          document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
+          document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
+           favoriteBtnEL = document.getElementById("favorite-button");
+            favoriteBtnEL.addEventListener("click", displayFavorites);
+
+          
+
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
         }
     });
 }
+// function saveFavorite() {
+//    localStorage.setItem("fav-0", breedName);
+//     localStorage.setItem("fav-1", breedName);
+//     localStorage.setItem("fav-2", breedName);
+// };
+function displayFavorites() {
+    const favBreedsElement = document.getElementById('fav-breed');
+    favBreedsElement.innerHTML = '';
+    localStorage.setItem("fav-0", breedName);
+
+    for (let i = 0; i < localStorage.length; i++) {
+        const name = localStorage.getItem("fav-" + i);
+        const li = document.createElement('li');
+        li.textContent = `${name}`;
+        favBreedsElement.appendChild(li);
+    }
+}
+displayFavorites();
+//store high scores
+function saveName(breedName) {
+    localStorage.setItem("fav-0", breedName);
+    console.log(`Initials: ${breedName}, Score: ${score}`);
+}
+saveName();
+
+
+
+
+
+
+
+ 
 
