@@ -26,12 +26,15 @@ searchButton.addEventListener("click", function () {
         contentType: 'application/json',
         success: function (result) {
             for (let i = 0; i < 3 && i < result.length; i++) {
-                    let imageLink = result[i].image_link;
-                    document.getElementById('card-' + i).setAttribute("src", imageLink);
-                    document.getElementById(i).classList.remove("hidden");
+                let imageLink = result[i].image_link;
+                document.getElementById('card-' + i).setAttribute("src", imageLink);
+                document.getElementById(i).classList.remove("hidden");
 
                     console.log(result[i].image_link)
                     console.error();
+                } catch (error) {
+                    document.getElementById('card-' + i).setAttribute("src", "https://api-ninjas.com/images/dogs/dog.jpg");// placeholder image goes here
+                }
             }
             error: function ajaxError(jqXHR) {
                 console.error('Error: ', jqXHR.responseText);
@@ -54,47 +57,47 @@ checkEvents();
 for (let i = 0; i < 3; i++) {
     let imageEl = document.getElementById("card-" + i);
     imageEl.addEventListener("click", function (event) {
-        let src= event.target.getAttribute("src");
-        let temp=src.split("/");
-        let breedName= temp[5].replace(".jpg","").replace("_","%20");
-      // Get the breed name from the input field
+        let src = event.target.getAttribute("src");
+        let temp = src.split("/");
+        let breedName = temp[5].replace(".jpg", "").replace("_", "%20");
+        // Get the breed name from the input field
 
-      console.log(event.target)
-      // Fetch breed information from the API
-      fetchBreedInformation(breedName,event.target);
-      
+        console.log(event.target)
+        // Fetch breed information from the API
+        fetchBreedInformation(breedName, event.target);
+
 
     });
-  }
-  function fetchBreedInformation(breedName) {
-  $.ajax({
-    method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/dogs?name='+breedName+'&min_height&max_height&min_weight&max_weight&max_life_expectancy&shedding&barking&energy&protectiveness&trainability',
-    headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw'},
-    contentType: 'application/json',
-    success: function(result) {
-        console.log(result);
-        // document.getElementById("breedTitle").textContent = breedInfo.name;
-        // document.getElementById("breedDescription").textContent = breedInfo.description;
-  
-          // Show the modal
+}
+function fetchBreedInformation(breedName) {
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/dogs?name=' + breedName + '&min_height&max_height&min_weight&max_weight&max_life_expectancy&shedding&barking&energy&protectiveness&trainability',
+        headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw' },
+        contentType: 'application/json',
+        success: function (result) {
+            console.log(result);
+            // document.getElementById("breedTitle").textContent = breedInfo.name;
+            // document.getElementById("breedDescription").textContent = breedInfo.description;
+
+            // Show the modal
           document.getElementById("breedTitle").textContent = result[0].name;
           document.getElementById("breedDescription").textContent = "Trainability 1 to 5: " + result[0].trainability;
           document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
           document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
-          let modal = document.getElementById("modal");
-          modal.classList.remove("hidden");
+            let modal = document.getElementById("modal");
+            modal.classList.remove("hidden");
            favoriteBtnEL = document.getElementById("favorite-button");
             favoriteBtnEL.addEventListener("click", displayFavorites);
 
           
 
-    },
-    error: function ajaxError(jqXHR) {
-        console.error('Error: ', jqXHR.responseText);
-    }
-});
-  }
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
+}
 // function saveFavorite() {
 //    localStorage.setItem("fav-0", breedName);
 //     localStorage.setItem("fav-1", breedName);
