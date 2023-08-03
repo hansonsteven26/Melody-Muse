@@ -143,7 +143,7 @@ function fetchExtraFacts() {
                         ranNum = 1
                     };
                     cardName.textContent = breedList[ranNum].name;
-                    bredFor.textContent = "This breed's use is " + breedList[ranNum].use;
+                    bredFor.textContent = "Breed characteristics and strengths: " + breedList[ranNum].use + ".";
                 // bannerContainer.append(breedList[ranNum].name + ". Breed decription: " + breedList[ranNum].use);
                 // console.log(bannerContainer);
                 setInterval(function () {
@@ -152,7 +152,7 @@ function fetchExtraFacts() {
                         ranNum = 1
                     };
                     cardName.textContent = breedList[ranNum].name;
-                    bredFor.textContent = "This breed's use is: " + breedList[ranNum].use;
+                    bredFor.textContent = "Breed characteristics and strengths: " + breedList[ranNum].use + ".";
                     // bannerContainer.append(breedList[ranNum].name + ". Breed decription: " + breedList[ranNum].use);
                 }, 5000);
             };

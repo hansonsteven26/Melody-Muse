@@ -4,3 +4,10 @@ body {
     background-color: rgb(63, 226, 128);
     color: white;
 }
+footer {
+    border-top: solid 1px black;
+}
+.pup-name::after {
+    content: "🐶";
+    padding-left: 8px;
+}
