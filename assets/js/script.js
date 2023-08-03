@@ -82,9 +82,11 @@ function fetchBreedInformation(breedName) {
 
             // Show the modal
             document.getElementById("breedTitle").textContent = result[0].name;
-            document.getElementById("breedDescription").textContent = "Trainability 1 to 5: " + result[0].trainability;
-            document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
-            document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
+            document.getElementById("breedDescription").textContent = "Trainability 1 meaning easy, 5 meaning difficult: " + result[0].trainability;
+            document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " in";
+            document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " lbs";
+            document.getElementById("shedding").textContent = "Shedding- 1 meaning none, 5 meaning max: " + result[0].shedding;
+            document.getElementById("energy").textContent = "Energy - 1 meaning low, 5 meaning high: " result[0].energy;
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
             favoriteBtnEL = document.getElementById("favorite-button");
