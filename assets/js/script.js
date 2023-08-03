@@ -63,6 +63,7 @@ for (let i = 0; i < 3; i++) {
         let src= event.target.getAttribute("src");
         let temp=src.split("/");
         let breedName= temp[5].replace(".jpg","").replace("_","%20");
+        breedName = breedName.replace("_", "%20");
       // Get the breed name from the input field
 
         // Fetch breed information from the API
@@ -78,7 +79,6 @@ function fetchBreedInformation(breedName) {
         headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw' },
         contentType: 'application/json',
         success: function (result) {
-            console.log(result);
 
             // Show the modal
             document.getElementById("breedTitle").textContent = result[0].name;
@@ -100,11 +100,6 @@ function fetchBreedInformation(breedName) {
         }
     });
 }
-// function saveFavorite() {
-//    localStorage.setItem("fav-0", breedName);
-//     localStorage.setItem("fav-1", breedName);
-//     localStorage.setItem("fav-2", breedName);
-// };
 
 function isLocalStorageAvailable(){
     var test = 'test';
@@ -121,7 +116,6 @@ function saveFavorites() {
     let breedTitle = document.getElementById("breedTitle").textContent;
     localStorage.setItem(`fav-${number}`, breedTitle);
     let favListItem = document.getElementById(`fav-${number}`);
-    console.log(document.getElementById("fav-" + number).textContent);
     favListItem.textContent = localStorage.getItem(`fav-${number}`);
     number++;
     if (number > 2) {
