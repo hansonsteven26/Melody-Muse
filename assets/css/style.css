@@ -1,6 +1,13 @@
+*:not(head) {
+    color: black;
+}
+
 body {
     height: 100vh;
     width: 100vw;
     background-color: rgb(63, 226, 128);
-    color: black;
+}
+
+.search-button {
+    background-color: white;
 }
