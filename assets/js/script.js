@@ -6,6 +6,7 @@ let searchEl = document.getElementById("breedInput");
 let breedName = "";
 let searchButton = document.getElementById("searchButton");
 let favoriteBtnEL = "";
+let number = 0;
 
 searchButton.addEventListener("click", function () {
     for (let i = 0; i < 3; i++){
@@ -30,11 +31,7 @@ searchButton.addEventListener("click", function () {
                 document.getElementById('card-' + i).setAttribute("src", imageLink);
                 document.getElementById(i).classList.remove("hidden");
 
-                    console.log(result[i].image_link)
-                    console.error();
-                } catch (error) {
-                    document.getElementById('card-' + i).setAttribute("src", "https://api-ninjas.com/images/dogs/dog.jpg");// placeholder image goes here
-                }
+                console.log(result[i].image_link)
             }
             error: function ajaxError(jqXHR) {
                 console.error('Error: ', jqXHR.responseText);
@@ -87,10 +84,10 @@ function fetchBreedInformation(breedName) {
           document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
-           favoriteBtnEL = document.getElementById("favorite-button");
-            favoriteBtnEL.addEventListener("click", displayFavorites);
+            favoriteBtnEL = document.getElementById("favorite-button");
+            favoriteBtnEL.addEventListener("click", saveFavorites);
 
-          
+
 
         },
         error: function ajaxError(jqXHR) {
@@ -103,31 +100,26 @@ function fetchBreedInformation(breedName) {
 //     localStorage.setItem("fav-1", breedName);
 //     localStorage.setItem("fav-2", breedName);
 // };
-function displayFavorites() {
-    const favBreedsElement = document.getElementById('fav-breed');
-    favBreedsElement.innerHTML = '';
-    localStorage.setItem("fav-0", breedName);
 
-    for (let i = 0; i < localStorage.length; i++) {
-        const name = localStorage.getItem("fav-" + i);
-        const li = document.createElement('li');
-        li.textContent = `${name}`;
-        favBreedsElement.appendChild(li);
+function isLocalStorageAvailable(){
+    var test = 'test';
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
     }
 }
-displayFavorites();
-//store high scores
-// function saveName(breedName) {
-//     localStorage.setItem("fav-0", breedName);
-//     console.log($,{breedName});
-// }
-// saveName();
 
-
-
-
-
-
-
- 
-
+function saveFavorites() {
+    let breedTitle = document.getElementById("breedTitle").textContent;
+    localStorage.setItem(`fav-${number}`, breedTitle);
+    let favListItem = document.getElementById(`fav-${number}`);
+    console.log(document.getElementById("fav-" + number).textContent);
+    favListItem.textContent = localStorage.getItem(`fav-${number}`);
+    number++;
+    if (number > 2) {
+        number = 0;
+    }
+}
