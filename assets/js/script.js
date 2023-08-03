@@ -31,11 +31,12 @@ searchButton.addEventListener("click", function () {
         contentType: 'application/json',
         success: function (result) {
             for (let i = 0; i < 3 && i < result.length; i++) {
-                let imageLink = result[i].image_link;
-                document.getElementById('card-' + i).setAttribute("src", imageLink);
-                document.getElementById(i).classList.remove("hidden");
+                    let imageLink = result[i].image_link;
+                    document.getElementById('card-' + i).setAttribute("src", imageLink);
+                    document.getElementById(i).classList.remove("hidden");
 
-                console.log(result[i].image_link)
+                    console.log(result[i].image_link)
+                    console.error();
             }
             error: function ajaxError(jqXHR) {
                 console.error('Error: ', jqXHR.responseText);
@@ -58,15 +59,15 @@ checkEvents();
 for (let i = 0; i < 3; i++) {
     let imageEl = document.getElementById("card-" + i);
     imageEl.addEventListener("click", function (event) {
-        let src = event.target.getAttribute("src");
-        let temp = src.split("/");
-        let breedName = temp[5].replace(".jpg", "").replace("_", "%20");
-        // Get the breed name from the input field
+        let src= event.target.getAttribute("src");
+        let temp=src.split("/");
+        let breedName= temp[5].replace(".jpg","").replace("_","%20");
+      // Get the breed name from the input field
 
-        console.log(event.target)
-        // Fetch breed information from the API
-        fetchBreedInformation(breedName, event.target);
-
+      console.log(event.target)
+      // Fetch breed information from the API
+      fetchBreedInformation(breedName,event.target);
+      
 
     });
 }
@@ -96,6 +97,22 @@ function fetchBreedInformation(breedName) {
             console.error('Error: ', jqXHR.responseText);
         }
     });
+}
+// function saveFavorite() {
+//    localStorage.setItem("fav-0", breedName);
+//     localStorage.setItem("fav-1", breedName);
+//     localStorage.setItem("fav-2", breedName);
+// };
+
+function isLocalStorageAvailable(){
+    var test = 'test';
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
+    }
 }
 
 function saveFavorites() {
