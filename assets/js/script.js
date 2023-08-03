@@ -9,7 +9,7 @@ let favoriteBtnEL = "";
 let number = 0;
 
 searchButton.addEventListener("click", function () {
-    for (let i = 0; i < 3; i++){
+    for (let i = 0; i < 3; i++) {
         document.getElementById("card-" + i).setAttribute("src", "");
         document.getElementById(i).classList.add("hidden");
     }
@@ -66,23 +66,21 @@ for (let i = 0; i < 3; i++) {
       
 
     });
-  }
-  function fetchBreedInformation(breedName) {
-  $.ajax({
-    method: 'GET',
-    url: 'https://api.api-ninjas.com/v1/dogs?name='+breedName+'&min_height&max_height&min_weight&max_weight&max_life_expectancy&shedding&barking&energy&protectiveness&trainability',
-    headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw'},
-    contentType: 'application/json',
-    success: function(result) {
-        console.log(result);
-        // document.getElementById("breedTitle").textContent = breedInfo.name;
-        // document.getElementById("breedDescription").textContent = breedInfo.description;
-  
-          // Show the modal
-          document.getElementById("breedTitle").textContent = result[0].name;
-          document.getElementById("breedDescription").textContent = "Trainability 1 to 5: " + result[0].trainability;
-          document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
-          document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
+}
+function fetchBreedInformation(breedName) {
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.api-ninjas.com/v1/dogs?name=' + breedName + '&min_height&max_height&min_weight&max_weight&max_life_expectancy&shedding&barking&energy&protectiveness&trainability',
+        headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw' },
+        contentType: 'application/json',
+        success: function (result) {
+            console.log(result);
+
+            // Show the modal
+            document.getElementById("breedTitle").textContent = result[0].name;
+            document.getElementById("breedDescription").textContent = "Trainability 1 to 5: " + result[0].trainability;
+            document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " cm";
+            document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " kg";
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
             favoriteBtnEL = document.getElementById("favorite-button");
@@ -90,12 +88,12 @@ for (let i = 0; i < 3; i++) {
 
 
 
-    },
-    error: function ajaxError(jqXHR) {
-        console.error('Error: ', jqXHR.responseText);
-    }
-});
-  }
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
+}
 // function saveFavorite() {
 //    localStorage.setItem("fav-0", breedName);
 //     localStorage.setItem("fav-1", breedName);
@@ -124,3 +122,39 @@ function saveFavorites() {
         number = 0;
     }
 }
+
+function fetchExtraFacts() {
+    $.ajax({
+        method: 'GET',
+        url: 'https://api.thedogapi.com/v1/breeds?',
+        headers: { 'X-Api-Key': 'live_FTU78RuBy8JufSDO0cYsxxEjUweRpQ8Vaa7oRI682TC2gEVMzBSGe1WxqUxkiDjj' },
+        contentType: 'application/json',
+        success: function (result) {
+            console.log(result);
+            let breedList = [{}];
+            let randomBreed = {
+                name: result[0].name,
+                use: result[0].bred_for
+            }
+            // breedList.push(randomBreed);
+            // console.log(breedList);
+            for (let i = 0; i < 20; i++) {
+                randomBreed = {
+                    name: result[i].name,
+                    use: result[i].bred_for,
+                };  
+                breedList.push(randomBreed)              
+            }
+            
+            console.log(breedList);  
+        },
+        error: function ajaxError(jqXHR) {
+            console.error('Error: ', jqXHR.responseText);
+        }
+    });
+}
+
+fetchExtraFacts();
+
+// get a list of ~20 breed id's
+// every 10-20 seconds, loop through the list to get the breed name and some other fact about it (ex: what they're bred for)
