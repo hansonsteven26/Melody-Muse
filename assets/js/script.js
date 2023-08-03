@@ -17,11 +17,7 @@ searchButton.addEventListener("click", function () {
         document.getElementById("card-" + i).setAttribute("src", "");
         document.getElementById(i).classList.add("hidden");
     }
-    // we want the value of the search box to display cards
-    // show cards that CONTAIN search input
     breedName = searchEl.value;
-    console.log(searchEl.value);
-    // $('img[type="src"]').val('');
 
     $.ajax({
 
@@ -30,13 +26,20 @@ searchButton.addEventListener("click", function () {
         headers: { 'X-Api-Key': '9otJVZp5fJ9qMc2fEsmc/g==YNaJYpvMld2P9utw' },
         contentType: 'application/json',
         success: function (result) {
+
+            if (result.length == 0) {
+                let errorMessage = $("#modal-error-message");
+                errorMessage.text(`The breed \"${breedName}\" does not exist in the API.`)
+                no_breed_modal.showModal();
+            }
+
             for (let i = 0; i < 3 && i < result.length; i++) {
                 let imageLink = result[i].image_link;
+                console.log(imageLink);
                 document.getElementById('card-' + i).setAttribute("src", imageLink);
                 document.getElementById(i).classList.remove("hidden");
-
-                console.log(result[i].image_link)
             }
+
             error: function ajaxError(jqXHR) {
                 console.error('Error: ', jqXHR.responseText);
             }
@@ -63,7 +66,6 @@ for (let i = 0; i < 3; i++) {
         let breedName = temp[5].replace(".jpg", "").replace("_", "%20");
         // Get the breed name from the input field
 
-        console.log(event.target)
         // Fetch breed information from the API
         fetchBreedInformation(breedName, event.target);
 
@@ -123,8 +125,6 @@ function fetchExtraFacts() {
                 name: result[0].name,
                 use: result[0].bred_for
             }
-            // breedList.push(randomBreed);
-            // console.log(breedList);
             for (let i = 0; i < 20; i++) {
                 randomBreed = {
                     name: result[i].name,
@@ -133,8 +133,6 @@ function fetchExtraFacts() {
                 breedList.push(randomBreed)              
             }
             function populateBanner() {
-                // let cardBreedName = document.getElementById("card-name").textContent;
-                // let cardBredFor = document.getElementById("card-bred-for").textContent;
                 let cardName = document.getElementById("card-name");
                 let bredFor = document.getElementById("card-bred-for");
                 let ranNum = getRandomInt(20);
@@ -144,8 +142,6 @@ function fetchExtraFacts() {
                     };
                     cardName.textContent = breedList[ranNum].name;
                     bredFor.textContent = "This breed's use is " + breedList[ranNum].use;
-                // bannerContainer.append(breedList[ranNum].name + ". Breed decription: " + breedList[ranNum].use);
-                // console.log(bannerContainer);
                 setInterval(function () {
                     ranNum = getRandomInt(20);
                     if (ranNum == 0) {
@@ -153,7 +149,6 @@ function fetchExtraFacts() {
                     };
                     cardName.textContent = breedList[ranNum].name;
                     bredFor.textContent = "This breed's use is: " + breedList[ranNum].use;
-                    // bannerContainer.append(breedList[ranNum].name + ". Breed decription: " + breedList[ranNum].use);
                 }, 5000);
             };
             populateBanner();
@@ -167,7 +162,3 @@ function fetchExtraFacts() {
 }
 
 fetchExtraFacts();
-
-// get a list of ~20 breed id's
-// every 10-20 seconds, loop through the list to get the breed name and some other fact about it (ex: what they're bred for)
-
