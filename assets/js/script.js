@@ -113,7 +113,8 @@ function isLocalStorageAvailable(){
 }
 
 function saveFavorites() {
-    localStorage.setItem(`fav-${number}`, breedName);
+    let breedTitle = document.getElementById("breedTitle").textContent;
+    localStorage.setItem(`fav-${number}`, breedTitle);
     let favListItem = document.getElementById(`fav-${number}`);
     console.log(document.getElementById("fav-" + number).textContent);
     favListItem.textContent = localStorage.getItem(`fav-${number}`);
@@ -121,19 +122,4 @@ function saveFavorites() {
     if (number > 2) {
         number = 0;
     }
-    // localStorage.setItem("fav-0", breedName);
-
-    // for (let i = 0; i < 3; i++) {
-        // const favBreedName = document.getElementById("fav-" + i);
-
-        // if (!isLocalStorageAvailable) {
-        //     localStorage.setItem("fav-" + (i + 1), breedName);
-        // } else {
-        //     localStorage.setItem("fav-" + i, breedName);
-        // }
-        // const li = document.createElement('li');
-        // li.textContent = `${favBreedName}`;
-        // favBreedsElement.appendChild(localStorage.getItem("fav-" + (i + 1)));
-    // }
-
 }
