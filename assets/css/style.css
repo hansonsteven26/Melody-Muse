@@ -11,3 +11,10 @@ body {
 .search-button {
     background-color: white;
 }
+footer {
+    border-top: solid 1px black;
+}
+.pup-name::after {
+    content: "🐶";
+    padding-left: 8px;
+}

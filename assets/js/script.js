@@ -156,14 +156,14 @@ function fetchExtraFacts() {
                         ranNum = 1
                     };
                     cardName.textContent = breedList[ranNum].name;
-                    bredFor.textContent = "This breed's use is " + breedList[ranNum].use;
+                    bredFor.textContent = "Breed characteristics and strengths: " + breedList[ranNum].use + ".";
                 setInterval(function () {
                     ranNum = getRandomInt(20);
                     if (ranNum == 0) {
                         ranNum = 1
                     };
                     cardName.textContent = breedList[ranNum].name;
-                    bredFor.textContent = "This breed's use is: " + breedList[ranNum].use;
+                    bredFor.textContent = "Breed characteristics and strengths: " + breedList[ranNum].use + ".";
                 }, 5000);
             };
             populateBanner();
