@@ -23,19 +23,20 @@
       class="border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 hover:border-blue-500">
     <button id="searchButton" class="font-semibold pl-4">Search</button>
   </div>
-  <div class="grid grid-rows-1 grid-flow-col gap-2 justify-center" id="breedImage">
-    <div id="0" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-0" onclick="modal.showModal()" src="" alt="Dog Image 1"></div>
-    <div id="1" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-1" onclick="modal.showModal()" src="" alt="Dog Image 2"></div>
-    <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" onclick="modal.showModal()" src="" alt="Dog Image 3"></div>
-  </div>
   <div>
-    <h2>Your Top 3 Breeds:</h2>
+    <h2 class="mt-4 ml-4">Your Top 3 Breeds:</h2>
       <ul id="fav-breed">
         <li id="fav-0"></li>
         <li id="fav-1"></li>
         <li id="fav-2"></li>
       </ul>
   </div>
+  <div class="grid grid-rows-1 grid-flow-col gap-2 justify-center" id="breedImage">
+    <div id="0" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-0" onclick="modal.showModal()" src="" alt="Dog Image 1"></div>
+    <div id="1" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-1" onclick="modal.showModal()" src="" alt="Dog Image 2"></div>
+    <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" onclick="modal.showModal()" src="" alt="Dog Image 3"></div>
+  </div>
+ 
   <!-- Modal container -->
   <!-- <div id="modal" class="hidden inset-0 items-center justify-center bg-black bg-opacity-50">
   <div class="modal-content bg-white p-4 max-w-md mx-auto">  Breed information will be displayed here 
