@@ -35,7 +35,6 @@ searchButton.addEventListener("click", function () {
 
             for (let i = 0; i < 3 && i < result.length; i++) {
                 let imageLink = result[i].image_link;
-                console.log(imageLink);
                 document.getElementById('card-' + i).setAttribute("src", imageLink);
                 document.getElementById(i).classList.remove("hidden");
             }
@@ -61,10 +60,10 @@ checkEvents();
 for (let i = 0; i < 3; i++) {
     let imageEl = document.getElementById("card-" + i);
     imageEl.addEventListener("click", function (event) {
-        let src = event.target.getAttribute("src");
-        let temp = src.split("/");
-        let breedName = temp[5].replace(".jpg", "").replace("_", "%20");
-        // Get the breed name from the input field
+        let src= event.target.getAttribute("src");
+        let temp=src.split("/");
+        let breedName= temp[5].replace(".jpg","").replace("_","%20");
+      // Get the breed name from the input field
 
         // Fetch breed information from the API
         fetchBreedInformation(breedName, event.target);
@@ -98,6 +97,22 @@ function fetchBreedInformation(breedName) {
             console.error('Error: ', jqXHR.responseText);
         }
     });
+}
+// function saveFavorite() {
+//    localStorage.setItem("fav-0", breedName);
+//     localStorage.setItem("fav-1", breedName);
+//     localStorage.setItem("fav-2", breedName);
+// };
+
+function isLocalStorageAvailable(){
+    var test = 'test';
+    try {
+        localStorage.setItem(test, test);
+        localStorage.removeItem(test);
+        return true;
+    } catch(e) {
+        return false;
+    }
 }
 
 function saveFavorites() {

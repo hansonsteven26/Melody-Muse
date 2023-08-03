@@ -10,7 +10,7 @@
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.5.0/dist/full.css" rel="stylesheet" type="text/css" />
   <link rel="stylesheet" href="./assets/tailwind.config.js" />
   <link rel="stylesheet" href="./assets/css/style.css" />
-
+  
 </head>
 
 <body>
@@ -18,11 +18,19 @@
 
     Unleash the Facts: A Comprehensive Guide to Dog Breeds
   </h1>
-
+  <p class="text-base flex items-center justify-center mb-4">*after searching, click the dog's image to generate more info*<span style='font-size:80px;'>&#128021;</span></p>
   <div class="flex items-center justify-center pb-6">
     <input type="text" id="breedInput" placeholder="Enter dog breed"
       class="border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 hover:border-blue-500 search-button">
-    <button id="searchButton" class="font-semibold pl-4">Search</button> <!-- call showModal() if there are no breeds -->
+    <button id="searchButton" class="font-semibold pl-4">Search </button> <!-- call showModal() if there are no breeds -->
+  </div>
+  <div>
+    <h2 class="ml-4 mb-2">&#128062;Your Top 3 Breeds:</h2>
+      <ul class="ml-4 mb-4" id="fav-breed">
+        <li id="fav-0"></li>
+        <li id="fav-1"></li>
+        <li id="fav-2"></li>
+      </ul>
   </div>
 
   <dialog id="no_breed_modal" class="modal modal-bottom sm:modal-middle">
@@ -45,17 +53,14 @@
     <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" onclick="modal.showModal()"
         src="" alt="Dog Image 3"></div>
   </div>
-
-  <div>
-    <h2>Your Top 3 Breeds:</h2>
-    <ul id="fav-breed">
-      <li id="fav-0"></li>
-      <li id="fav-1"></li>
-      <li id="fav-2"></li>
-    </ul>
+ 
+  <!-- Modal container -->
+  <!-- <div id="modal" class="hidden inset-0 items-center justify-center bg-black bg-opacity-50">
+  <div class="modal-content bg-white p-4 max-w-md mx-auto">  Breed information will be displayed here 
   </div>
-
-  <dialog id="modal" class="modal modal-bottom sm:modal-middle">
+</div> -->
+  <!-- <button class="btn" onclick="modal.showModal()">open modal</button> -->
+  <dialog id="modal" class="modal modal-bottom sm:modal-middle text-white">
     <form method="dialog" class="modal-box">
       <h3 id="breedTitle" class="modal-content font-bold text-lg text-white"></h3>
       <p id="breedHeight" class="py-4 text-white"></p>
