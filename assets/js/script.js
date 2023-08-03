@@ -8,6 +8,10 @@ let searchButton = document.getElementById("searchButton");
 let favoriteBtnEL = "";
 let number = 0;
 
+function getRandomInt(max) {
+    return Math.floor(Math.random() * max);
+}; 
+
 searchButton.addEventListener("click", function () {
     for (let i = 0; i < 3; i++) {
         document.getElementById("card-" + i).setAttribute("src", "");
@@ -128,12 +132,37 @@ function fetchExtraFacts() {
                 };
                 breedList.push(randomBreed)              
             }
-            
+            function populateBanner() {
+                // let cardBreedName = document.getElementById("card-name").textContent;
+                // let cardBredFor = document.getElementById("card-bred-for").textContent;
+                let cardName = document.getElementById("card-name");
+                let bredFor = document.getElementById("card-bred-for");
+                let ranNum = getRandomInt(20);
+                ranNum = getRandomInt(20);
+                    if (ranNum == 0) {
+                        ranNum = 1
+                    };
+                    cardName.textContent = breedList[ranNum].name;
+                    bredFor.textContent = "This breed's use is " + breedList[ranNum].use;
+                // bannerContainer.append(breedList[ranNum].name + ". Breed decription: " + breedList[ranNum].use);
+                // console.log(bannerContainer);
+                setInterval(function () {
+                    ranNum = getRandomInt(20);
+                    if (ranNum == 0) {
+                        ranNum = 1
+                    };
+                    cardName.textContent = breedList[ranNum].name;
+                    bredFor.textContent = "This breed's use is: " + breedList[ranNum].use;
+                    // bannerContainer.append(breedList[ranNum].name + ". Breed decription: " + breedList[ranNum].use);
+                }, 5000);
+            };
+            populateBanner();
             console.log(breedList);  
         },
         error: function ajaxError(jqXHR) {
             console.error('Error: ', jqXHR.responseText);
         }
+        
     });
 }
 
@@ -141,3 +170,4 @@ fetchExtraFacts();
 
 // get a list of ~20 breed id's
 // every 10-20 seconds, loop through the list to get the breed name and some other fact about it (ex: what they're bred for)
+
