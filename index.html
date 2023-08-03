@@ -5,10 +5,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>
-    "Unleash the Facts: A Comprehensive Guide to Dog Breeds"</title>
-  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" />
+    Unleash the Facts: A Comprehensive Guide to Dog Breeds</title>
+  <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
   <link href="https://cdn.jsdelivr.net/npm/daisyui@3.5.0/dist/full.css" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="./assets/tailwind.config.js">
+  <link rel="stylesheet" href="./assets/tailwind.config.js" />
   <link rel="stylesheet" href="./assets/css/style.css" />
   
 </head>
@@ -21,8 +21,8 @@
   <p class="text-base flex items-center justify-center mb-4">*after searching, click the dog's image to generate more info*<span style='font-size:80px;'>&#128021;</span></p>
   <div class="flex items-center justify-center pb-6">
     <input type="text" id="breedInput" placeholder="Enter dog breed"
-      class="border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 hover:border-blue-500">
-    <button id="searchButton" class="font-semibold pl-4">Search </button>
+      class="border border-gray-300 rounded-md px-4 py-2 focus:border-blue-500 hover:border-blue-500 search-button">
+    <button id="searchButton" class="font-semibold pl-4">Search </button> <!-- call showModal() if there are no breeds -->
   </div>
   <div>
     <h2 class="ml-4 mb-2">&#128062;Your Top 3 Breeds:</h2>
@@ -32,26 +32,37 @@
         <li id="fav-2"></li>
       </ul>
   </div>
+
+  <dialog id="no_breed_modal" class="modal modal-bottom sm:modal-middle">
+    <form method="dialog" class="modal-box">
+      <h3 class="font-bold text-lg text-white">Error!</h3>
+      <p id="modal-error-message" class="py-4 text-white"></p>
+      <p class="py-4 text-white">Try searching one of the random breeds.</p>
+      <div class="modal-action">
+        <!-- if there is a button in form, it will close the modal -->
+        <button class="btn">Close</button>
+      </div>
+    </form>
+  </dialog>
+
   <div class="grid grid-rows-1 grid-flow-col gap-2 justify-center" id="breedImage">
-    <div id="0" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-0" onclick="modal.showModal()" src="" alt="Dog Image 1"></div>
-    <div id="1" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-1" onclick="modal.showModal()" src="" alt="Dog Image 2"></div>
-    <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" onclick="modal.showModal()" src="" alt="Dog Image 3"></div>
+    <div id="0" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-0" onclick="modal.showModal()"
+        src="" alt="Dog Image 1"></div>
+    <div id="1" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-1" onclick="modal.showModal()"
+        src="" alt="Dog Image 2"></div>
+    <div id="2" class="hidden max-w-sm rounded overflow-hidden shadow-lg"><img id="card-2" onclick="modal.showModal()"
+        src="" alt="Dog Image 3"></div>
   </div>
  
   <!-- Modal container -->
-  <!-- <div id="modal" class="hidden inset-0 items-center justify-center bg-black bg-opacity-50">
-  <div class="modal-content bg-white p-4 max-w-md mx-auto">  Breed information will be displayed here 
-  </div>
-</div> -->
-  <!-- <button class="btn" onclick="modal.showModal()">open modal</button> -->
   <dialog id="modal" class="modal modal-bottom sm:modal-middle text-white">
     <form method="dialog" class="modal-box">
-      <h3 id="breedTitle" class="modal-content font-bold text-lg"></h3>
-      <p id="breedHeight" class="py-4"></p>
-    <p id="breedDescription" class="py-4"></p>
-    <p id="breedWeight" class="py-4"></p>
+      <h3 id="breedTitle" class="modal-content font-bold text-lg text-white"></h3>
+      <p id="breedHeight" class="py-4 text-white"></p>
+      <p id="breedDescription" class="py-4 text-white"></p>
+      <p id="breedWeight" class="py-4 text-white"></p>
       <div class="modal-action">
-      <button id="favorite-button" class="btn">Favorite</button>
+        <button id="favorite-button" class="btn">Favorite</button>
         <!-- if there is a button in form, it will close the modal -->
         <button class="btn">Close</button>
       </div>
@@ -73,4 +84,5 @@
     </div>
   </div>
 </footer>
+
 </html>
