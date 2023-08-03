@@ -125,7 +125,7 @@ function fetchExtraFacts() {
                 randomBreed = {
                     name: result[i].name,
                     use: result[i].bred_for,
-                };  
+                };
                 breedList.push(randomBreed)              
             }
             
