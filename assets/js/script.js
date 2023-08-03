@@ -86,7 +86,7 @@ function fetchBreedInformation(breedName) {
             document.getElementById("breedHeight").textContent = "Height: " + result[0].max_height_male + " in";
             document.getElementById("breedWeight").textContent = "Weight: " + result[0].max_weight_male + " lbs";
             document.getElementById("shedding").textContent = "Shedding- 1 meaning none, 5 meaning max: " + result[0].shedding;
-            document.getElementById("energy").textContent = "Energy - 1 meaning low, 5 meaning high: " result[0].energy;
+            document.getElementById("energy").textContent = "Energy - 1 meaning low, 5 meaning high: " + result[0].energy;
             let modal = document.getElementById("modal");
             modal.classList.remove("hidden");
             favoriteBtnEL = document.getElementById("favorite-button");
